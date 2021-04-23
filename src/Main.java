@@ -26,7 +26,7 @@ public class Main {
         // generate records that map owners to their cars
         // the first array defines the number of persons who drive one car
         // the second array defines the number of cars that belong to one person
-        OwnerToCarGenerator.generate(Arrays.asList(1, 1, 1), Arrays.asList(2, 2));
+        OwnerToCarGenerator.generate(Arrays.asList(1, 2), Arrays.asList(2, 3));
 
         // generate the parking spaces
         // args: number of floors, number of sectors per floor, number of places per sector
