@@ -25,29 +25,39 @@ public class Tools {
 
     static void executeUpdate(Connection db, String sql) {
         try {
-            db.createStatement().executeUpdate(sql);
+            final Statement st = db.createStatement();
+            st.executeUpdate(sql);
+            st.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     static int getIntViaSQL(Connection db, String sql) {
+        int result = 0;
         try {
-            ResultSet rs = db.createStatement().executeQuery(sql);
+            final Statement st = db.createStatement();
+            final ResultSet rs = st.executeQuery(sql);
             rs.next();
-            return rs.getInt(1);
+            result = rs.getInt(1);
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            return 0;
         }
+        return result;
     }
 
     static ArrayList<Integer> getArrayOfIntViaSQL(Connection db, String sql) {
-        ArrayList<Integer> result = new ArrayList<>();
+        final ArrayList<Integer> result = new ArrayList<>();
         try {
-            ResultSet rs = db.createStatement().executeQuery(sql);
-            while (rs.next())
+            final Statement st = db.createStatement();
+            final ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
                 result.add(rs.getInt(1));
+            }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -55,11 +65,15 @@ public class Tools {
     }
 
     static ArrayList<String> getArrayOfStringViaSQL(Connection db, String sql) {
-        ArrayList<String> result = new ArrayList<>();
+        final ArrayList<String> result = new ArrayList<>();
         try {
-            ResultSet rs = db.createStatement().executeQuery(sql);
-            while (rs.next())
+            final Statement st = db.createStatement();
+            final ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
                 result.add(rs.getString(1));
+            }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -67,8 +81,8 @@ public class Tools {
     }
 
     static ArrayList<String> getFileContent(String filename) {
-        ArrayList<String> result = new ArrayList<>();
-        BufferedReader reader;
+        final ArrayList<String> result = new ArrayList<>();
+        final BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(filename));
         } catch (FileNotFoundException e) {
