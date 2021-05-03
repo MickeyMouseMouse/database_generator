@@ -32,10 +32,10 @@ public class CarNumbersGenerator {
     }
 
     private static int getModelID(Connection db) {
-        return Tools.getIntViaSQL(db, "SELECT model_id FROM Models ORDER BY RANDOM() LIMIT 1;");
+        return Tools.getIntViaSQL(db, "SELECT model_id FROM Models WHERE model_id > 1 ORDER BY RANDOM() LIMIT 1;");
     }
 
     private static int getColorID(Connection db) {
-        return Tools.getIntViaSQL(db, "SELECT color_id FROM Colors ORDER BY RANDOM() LIMIT 1;");
+        return Tools.getIntViaSQL(db, "SELECT color_id FROM Colors WHERE color_id > 1 ORDER BY RANDOM() LIMIT 1;");
     }
 }

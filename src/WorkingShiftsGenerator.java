@@ -26,6 +26,6 @@ public class WorkingShiftsGenerator {
     }
 
     private static int getGuardID(Connection db) {
-        return Tools.getIntViaSQL(db, "SELECT guard_id FROM Security_Guards ORDER BY RANDOM() LIMIT 1;");
+        return Tools.getIntViaSQL(db, "SELECT guard_id FROM Security_Guards WHERE guard_id > 1 ORDER BY RANDOM() LIMIT 1;");
     }
 }

@@ -10,7 +10,7 @@ public class ParkingLogbookGenerator {
         StringBuilder cmd = new StringBuilder();
 
         ArrayList<Integer> workingShifts = Tools.getArrayOfIntViaSQL(db, "SELECT working_shift_id FROM Working_Shifts;");
-        freePlaces = Tools.getArrayOfIntViaSQL(db, "SELECT place_id FROM Places;");
+        freePlaces = Tools.getArrayOfIntViaSQL(db, "SELECT place_id FROM Places WHERE place_id > 1;");
         addPreviousData();
 
         DateTime dt = new DateTime(currentDate, "00:00:00");
@@ -79,7 +79,7 @@ public class ParkingLogbookGenerator {
     }
 
     private static int getTariffID(Connection db) {
-        return Tools.getIntViaSQL(db, "SELECT tariff_id FROM Tariffs ORDER BY RANDOM() LIMIT 1;");
+        return Tools.getIntViaSQL(db, "SELECT tariff_id FROM Tariffs WHERE tariff_id > 1 ORDER BY RANDOM() LIMIT 1;");
     }
 
     private static int getOwnerToCarID(Connection db) {
