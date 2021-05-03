@@ -13,6 +13,7 @@ public class OwnerToCarGenerator {
 
         carNumbers = Tools.getArrayOfStringViaSQL(db, "SELECT car_number FROM Car_Numbers;");
         driverLicenseNumbers = Tools.getArrayOfStringViaSQL(db, "SELECT driver_license_number FROM Owners;");
+        addPreviousData();
 
         for (Integer persons : personsOnCar) {
             String number = getCarNumber();
@@ -36,6 +37,15 @@ public class OwnerToCarGenerator {
 
         Tools.executeUpdate(db, cmd.toString());
         Tools.disconnect(db);
+    }
+
+    // delete already distributed pairs (car number - driver license numbers)
+    private static void addPreviousData() {
+        carNumbers.removeIf(number -> number.equals("А111АА178") || number.equals("А222АА178") ||
+                number.equals("В333ВВ178") || number.equals("С444СС178"));
+        driverLicenseNumbers.removeIf(number -> number.equals("1111111111") ||
+                number.equals("2222222222") || number.equals("3333333333") ||
+                number.equals("4444444444"));
     }
 
     private static String getCarNumber() {

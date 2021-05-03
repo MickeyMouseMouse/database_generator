@@ -24,7 +24,7 @@ public class ParkingLogbookGenerator {
                     for(CarsOnParking car : carsOnParking) {
                         if (car.owner_to_car_id == owner_to_car_id) { // the car pulled out from parking
                             cmd.append("INSERT INTO Parking_Logbook(working_shift_id, log_date, log_time, owner_to_car_id, entry_exit, place_id, tariff_id) VALUES ('")
-                                    .append(workingShifts.get(3 * i + j)).append("','")
+                                    .append(workingShifts.get(3 * i + j + 3)).append("','")
                                     .append(dt.getCurrentDate()).append("','")
                                     .append(dt.getCurrentTime()).append("','")
                                     .append(owner_to_car_id).append("','")
@@ -43,7 +43,7 @@ public class ParkingLogbookGenerator {
                         int tariff = getTariffID(db);
                         carsOnParking.add(new CarsOnParking(owner_to_car_id, place, tariff));
                         cmd.append("INSERT INTO Parking_Logbook(working_shift_id, log_date, log_time, owner_to_car_id, entry_exit, place_id, tariff_id) VALUES ('")
-                                .append(workingShifts.get(3 * i + j)).append("','")
+                                .append(workingShifts.get(3 * i + j + 3)).append("','")
                                 .append(dt.getCurrentDate()).append("','")
                                 .append(dt.getCurrentTime()).append("','")
                                 .append(owner_to_car_id).append("','")
