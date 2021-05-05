@@ -1,5 +1,7 @@
 public class DateTime {
-    private int year, month, day, hour, minute, second;
+    private int year, month, day, hour, minute, second; // initial date and time
+    private final int[] numberOfDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
     DateTime(String date, String time) {
         String[] d = date.split("-");
         String[] t = time.split(":");
@@ -22,7 +24,13 @@ public class DateTime {
             minute %= 60;
             if (++hour == 24) {
                 hour = 0;
-                day++;
+                if (++day == numberOfDays[month - 1] + 1) {
+                    day = 1;
+                    if (++month == 13) {
+                        month = 1;
+                        year++;
+                    }
+                }
             }
         }
         return String.format("%02d:%02d:%02d", hour, minute, second);
@@ -33,6 +41,14 @@ public class DateTime {
     }
 
     public String getNextDate() {
-        return String.format("%04d-%02d-%02d", year, month, ++day);
+        if (++day == numberOfDays[month - 1] + 1) {
+            day = 1;
+            if (++month == 13) {
+                month = 1;
+                year++;
+            }
+        }
+
+        return String.format("%04d-%02d-%02d", year, month, day);
     }
 }

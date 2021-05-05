@@ -3,6 +3,7 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         final int ALL_ITEMS = Integer.MAX_VALUE;
+        final String CURRENT_DATE = "2021-05-01";
         final int DURATION = 31;
 
         // add model names from a file
@@ -22,7 +23,7 @@ public class Main {
 
         // generate working shifts starting from the specified date
         // for the specified number of days
-        WorkingShiftsGenerator.generate("2021-05-01", DURATION);
+        WorkingShiftsGenerator.generate(CURRENT_DATE, DURATION);
 
         // generate records that map owners to their cars
         // the first array defines the number of persons who drive one car
@@ -36,6 +37,6 @@ public class Main {
 
         // generate the main table
         // records start from the specified date and last the specified number of days
-        ParkingLogbookGenerator.generate("2021-05-01", DURATION);
+        ParkingLogbookGenerator.generate(CURRENT_DATE, DURATION);
     }
 }
